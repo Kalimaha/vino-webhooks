@@ -3,15 +3,10 @@ require "securerandom"
 
 class KafkaRepository
   class << self
-    def publish_message
-      puts "KAFKA_CLIENT_CERT: #{ENV['KAFKA_CLIENT_CERT']}"
-      puts "KAFKA_CLIENT_CERT_KEY: #{ENV['KAFKA_CLIENT_CERT_KEY']}"
-      puts "KAFKA_PREFIX: #{ENV['KAFKA_PREFIX']}"
-      puts "KAFKA_TRUSTED_CERT: #{ENV['KAFKA_TRUSTED_CERT']}"
-      puts "KAFKA_URL: #{ENV['KAFKA_URL']}"
-
+    def publish_message(message_body)
       topic   = "#{ENV["KAFKA_PREFIX"]}tradegecko"
-      message = { "key": SecureRandom.uuid, "value": { "hello": "world" } }
+      puts "PUBLISH TO #{topic}"
+      message = { "key": SecureRandom.uuid, "value": message_body }
 
       puts "TOPIC: #{topic}"
       puts "MESSAGE: #{message}"
